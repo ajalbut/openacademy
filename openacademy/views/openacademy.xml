@@ -164,6 +164,7 @@
         <field name="arch" type="xml">
             <field name="title" position="after">
                 <field name="is_instructor" />
+                <field name="teacher_category" widget="radio"/>
             </field>
             <xpath expr="//page[@name='sales_purchases']" position="after">
                 <page name="session_ids" string="Sessions">

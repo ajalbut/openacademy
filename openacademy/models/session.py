@@ -23,13 +23,20 @@ class Session(models.Model):
     seats = fields.Integer(
         string=u"Seats"
     )
-
+    teacher_category = fields.Selection(
+        selection=[
+            ('level1', 'Level 1'),
+            ('level2', 'Level 2')
+        ],
+        string="Teacher Category"
+    )
     instructor_id = fields.Many2one(
         'res.partner', ondelete='set null', domain=[
             '|',
             ('is_instructor', '=', True),
-            ('category_id.name', 'ilike', 'teacher')
+            ('teacher_category', 'in', [n for n, l in teacher_category.selection])
         ]
     )
+
     course_id = fields.Many2one('openacademy.course', ondelete='cascade')
     attendee_ids = fields.One2many('openacademy.attendee', 'id')
