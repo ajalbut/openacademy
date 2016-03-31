@@ -14,3 +14,6 @@ class Attendee(models.Model):
         string="Name",
         help="Insira o nome do Attendee"
     )
+
+    partner_id = fields.Many2one('res.partner', ondelete='cascade')
+    session_id = fields.Many2one('openacademy.session', ondelete='cascade')
