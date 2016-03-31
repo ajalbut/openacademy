@@ -137,6 +137,8 @@
                 <field name="start_date"/>
                 <field name="duration"/>
                 <field name="seats"/>
+                <field name="active"/>
+                <field name="taken_seats" widget="percentpie"/>
                 <field name="course_id"/>
                 <field name="instructor_id"/>
                 <field name="attendee_ids"/>
@@ -153,6 +155,7 @@
             <tree>
                 <field name="name"/>
                 <field name="course_id"/>
+                <field name="taken_seats" widget="progressbar"/>
             </tree>
         </field>
     </record>
