@@ -39,12 +39,13 @@
         <field name="type">form</field>  <!-- tree,form,calendar,search,graph,gantt -->
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
-            <form string="Meus Cursos">
+            <form>
                 <div class="oe_title">
                     <label for="name"
                            class="oe_edit_only"
                            string="Course name" />
                     <h1><field name="name"/></h1>
+                    <h1><field name="responsible_id"/></h1>
                 </div>
                 <separator string="Geral" colspan="2" />
                 <notebook>
@@ -54,6 +55,7 @@
                         </group>
                     </page>
                     <page string="Outras informaçoes">
+                        <field name="session_ids" />
                     </page>
                 </notebook>
         </form>
@@ -66,9 +68,9 @@
         <field name="type">tree</field>  <!-- tree,form,calendar,search,graph,gantt -->
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
-            <tree string="Meus Cursos">
+            <tree>
                 <field name="name"/>
-                <field name="description"/>
+                <field name="responsible_id"/>
             </tree>
         </field>
     </record>
@@ -130,11 +132,14 @@
         <field name="type">form</field>  <!-- tree,form,calendar,search,graph,gantt -->
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
-            <form string="Meus Cursos">
+            <form>
                 <field name="name"/>
                 <field name="start_date"/>
                 <field name="duration"/>
                 <field name="seats"/>
+                <field name="course_id"/>
+                <field name="instructor_id"/>
+                <field name="attendee_ids"/>
             </form>
         </field>
     </record>
@@ -145,14 +150,27 @@
         <field name="type">tree</field>  <!-- tree,form,calendar,search,graph,gantt -->
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
-            <tree string="Meus Cursos">
+            <tree>
                 <field name="name"/>
-                <field name="start_date"/>
-                <field name="duration"/>
-                <field name="seats"/>
+                <field name="course_id"/>
             </tree>
         </field>
     </record>
-        
+
+    <record model="ir.ui.view" id="openacademy_res_partner_view_form">
+        <field name="name">view.name</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="title" position="after">
+                <field name="is_instructor" />
+            </field>
+            <xpath expr="//page[@name='sales_purchases']" position="after">
+                <page name="session_ids" string="Sessions">
+                    <field name="session_ids" />
+                </page>
+            </xpath>
+        </field>
+    </record>
     </data>
 </openerp>
