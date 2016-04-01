@@ -18,5 +18,6 @@
         'security/ir.model.access.csv',
         'views/openacademy.xml',
         'views/res_partner_view.xml',
+        'workflows/session_workflow.xml'
     ]
 }

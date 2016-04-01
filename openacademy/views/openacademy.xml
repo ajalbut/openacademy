@@ -144,6 +144,16 @@
         <field name="priority" eval="1"/>
         <field name="arch" type="xml">
             <form>
+                <header>
+                    <button string="Confirm" name="set_under_review"></button>
+                    <button string="Enroll" name="set_enrollment"></button>
+                    <button string="Start" name="set_ongoing"></button>
+                    <button string="Finish" name="set_finished"></button>
+                    <button string="Reject" name="set_reject"></button>
+                    <button string="Back to Draft" name="button_back_to_draft" type="object"></button>
+                    <button string="Cancel" name="set_cancelled"></button>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,under_review,enrollment,ongoing,finished"/>
+                </header>
                 <group>
                     <group>
                         <field name="name"/>

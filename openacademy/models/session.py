@@ -59,6 +59,30 @@ class Session(models.Model):
         store=True,
     )
 
+    state = fields.Selection(
+        selection=[
+            ('draft', 'Draft'),
+            ('under_review', 'To review'),
+            ('enrollment', 'Enrollment'),
+            ('ongoing', 'Ongoing'),
+            ('finished', 'Finished'),
+            ('rejected', 'Rejected'),
+            ('cancelled', 'Cancelled'),
+        ],
+        default='draft',
+        string='State',
+    )
+
+    @api.multi
+    def button_back_to_draft(self):
+        for record in self:
+            if record.state not in ('under_review', 'rejected'):
+                    raise UserError('Não é possível retornar o objeto neste estado.')
+            record.write({'state': 'draft'})
+            record.delete_workflow()
+            record.create_workflow()
+        return True
+
     @api.multi
     @api.depends('seats', 'attendee_ids')
     def _compute_taken_seats(self):
